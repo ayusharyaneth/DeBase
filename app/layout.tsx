@@ -1,18 +1,21 @@
-"use client";
-
-import "./globals.css";
-import { MiniAppProvider } from "@neynar/react";
+import "../globals.css";
 import WalletProvider from "../components/WalletProvider";
+import MiniAppWrapper from "../components/MiniAppWrapper";
 
-export default function RootLayout({ children }) {
+export const metadata = {
+  title: "DeBaseApp",
+  description: "Daily Neynar + Base + Zora booster"
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <MiniAppProvider>
+        <MiniAppWrapper>
           <WalletProvider>
             {children}
           </WalletProvider>
-        </MiniAppProvider>
+        </MiniAppWrapper>
       </body>
     </html>
   );
