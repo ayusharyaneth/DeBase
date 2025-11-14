@@ -1,25 +1,25 @@
 "use client";
 
-import { WagmiConfig, configureChains, createConfig } from "wagmi";
-import { base } from "wagmi/chains";
+import { WagmiConfig, createConfig, configureChains } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
-import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { base } from "wagmi/chains";
+import React from "react";
 
 const { chains, publicClient } = configureChains([base], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({
-  appName: "DeBase",
-  projectId: "YOUR_WC_PROJECT_ID",
-  chains,
+  appName: "DeBaseApp",
+  chains
 });
 
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
-  publicClient,
+  publicClient
 });
 
-export default function WalletProvider({ children }) {
+export default function WalletProvider({ children }: { children: React.ReactNode }) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
